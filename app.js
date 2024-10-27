@@ -9,20 +9,23 @@ const loadCategory = async () => {
         const div = document.createElement('div')
         div.innerHTML = `
         
-         <button class="btn btn-neutral">${item.category_name}</button>
+         <button onclick="loadNews('${item.category_id}')" class="btn btn-neutral">${item.category_name}</button>
         `
         categoryContainer.appendChild(div)
 
     });
 }
-const loadNews = async () => {
-    const res = await fetch('https://openapi.programming-hero.com/api/news/category/01')
+const loadNews = async (categoryId) => {
+    console.log(categoryId)
+    const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`)
     const data = await res.json()
     // console.log(data.data)
     const items = data.data
+    const newsContainer = document.getElementById("news-container");
+    newsContainer.innerHTML = ''
     items.forEach((item) => {
         console.log(item.author.name)
-        const newsContainer = document.getElementById("news-container");
+
         const div = document.createElement("div");
         div.classList.add("singleNews");
         div.innerHTML = `
@@ -77,4 +80,4 @@ const loadNews = async () => {
     });
 }
 loadCategory()
-loadNews()
+loadNews('01')
