@@ -79,5 +79,17 @@ const loadNews = async (categoryId) => {
 
     });
 }
+
+const handleSearch = () => {
+    const value = document.getElementById('search-box').value
+    console.log(value)
+    if (value) {
+        loadNews(value)
+    }
+    else {
+        alert('please enter vaild category id')
+    }
+
+}
 loadCategory()
 loadNews('01')
